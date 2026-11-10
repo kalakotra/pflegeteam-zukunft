@@ -1,0 +1,42 @@
+// Only the Bootstrap parts this site uses.
+@import 'bootstrap/scss/functions';
+@import 'tokens';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/variables-dark';
+
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+@import 'bootstrap/scss/maps';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/utilities';
+
+// Only the utility groups the templates use (keeps app.css small for LCP).
+$utilities: map-get-multiple($utilities, (
+    'align-items', 'background-color', 'color', 'display', 'flex', 'flex-direction', 'flex-grow', 'flex-wrap',
+    'gap', 'justify-content', 'margin', 'margin-x', 'margin-y', 'margin-top', 'margin-end', 'margin-bottom', 'margin-start',
+    'order', 'padding', 'padding-x', 'padding-y', 'padding-top', 'padding-bottom', 'text-align', 'width', 'position',
+));
+
+@import 'bootstrap/scss/root';
+@import 'bootstrap/scss/reboot';
+@import 'bootstrap/scss/type';
+@import 'bootstrap/scss/images';
+@import 'bootstrap/scss/containers';
+@import 'bootstrap/scss/grid';
+@import 'bootstrap/scss/forms/labels';
+@import 'bootstrap/scss/forms/form-text';
+@import 'bootstrap/scss/forms/form-control';
+@import 'bootstrap/scss/forms/form-select';
+@import 'bootstrap/scss/forms/form-check';
+@import 'bootstrap/scss/buttons';
+@import 'bootstrap/scss/transitions';
+@import 'bootstrap/scss/dropdown';
+@import 'bootstrap/scss/nav';
+@import 'bootstrap/scss/navbar';
+@import 'bootstrap/scss/card';
+@import 'bootstrap/scss/breadcrumb';
+@import 'bootstrap/scss/badge';
+@import 'bootstrap/scss/close';
+@import 'bootstrap/scss/offcanvas';
+@import 'bootstrap/scss/helpers';
+@import 'bootstrap/scss/utilities/api';

@@ -1,0 +1,32 @@
+---
+Name: myproject
+---
+SilverStripe\Core\Manifest\ModuleManifest:
+  project: app
+
+SilverStripe\i18n\i18n:
+  default_locale: de_DE
+
+---
+Name: ptzukunft-theme
+After:
+  - '#rootroutes'
+  - '#coreroutes'
+---
+SilverStripe\View\SSViewer:
+  themes:
+    - 'ptzukunft'
+    - '$default'
+
+Atwx\ViteHelper\Helper\ViteHelper:
+  manifest_path: '/app/client/dist/.vite/manifest.json'
+  output_url: '/app/client/dist/'
+  editor_css: 'app/client/src/scss/editor.scss'
+
+SilverStripe\CMS\Model\SiteTree:
+  # Page tree comes from App\Tasks\SeedSiteTask
+  create_default_pages: false
+
+SilverStripe\SiteConfig\SiteConfig:
+  extensions:
+    - App\Extensions\SiteConfigExtension

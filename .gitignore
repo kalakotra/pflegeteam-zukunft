@@ -1,0 +1,11 @@
+/vendor/
+/node_modules/
+/public/assets/
+/public/_resources/
+/app/client/dist/
+/silverstripe-cache/
+/.env
+/.graphql-generated/
+/preview/node_modules/
+.DS_Store
+/preview/

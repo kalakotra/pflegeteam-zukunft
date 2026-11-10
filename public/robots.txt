@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /Security/
+Disallow: /dev/
+
+Sitemap: https://www.pflegeteam-zukunft.de/sitemap.xml

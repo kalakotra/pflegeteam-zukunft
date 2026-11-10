@@ -1,0 +1,24 @@
+---
+Name: app-seo
+After:
+  - '#schema-manager'
+  - '#youwilllikeit-elements-schema'
+---
+# Organization / WebSite / WebPage / BreadcrumbList: automatic (schema-manager v2).
+DorsetDigital\SchemaManager\Service\SchemaManager:
+  automatic_organisation_schema: true
+  automatic_website_schema: true
+  automatic_webpage_schema: true
+  automatic_breadcrumb_schema: true
+
+# WebPage inLanguage, Service (ServicePage), JobPosting (JobPage)
+SilverStripe\CMS\Model\SiteTree:
+  extensions:
+    - App\Extensions\PageSchemaExtension
+
+---
+Name: app-sitemap
+---
+Wilr\GoogleSitemaps\GoogleSitemap:
+  enabled: true
+  objects_per_sitemap: 1000

@@ -1,0 +1,179 @@
+// Feature grid (ElementFeatureGrid + FeatureGridExtension), job list, team
+.feature-card {
+    transition: box-shadow .2s ease, transform .2s ease;
+
+    &--linked:hover {
+        box-shadow: 0 14px 34px rgba($ink, .12);
+        transform: translateY(-2px);
+    }
+
+    .card-img-top { aspect-ratio: 16 / 10; object-fit: cover; }
+
+    &__icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 3.25rem;
+        height: 3.25rem;
+        margin-bottom: 1.25rem;
+        border-radius: .875rem;
+        background: $petrol-tint;
+        color: $petrol;
+    }
+
+    &__title {
+        margin-bottom: .5rem;
+        font-size: 1.5rem;
+        font-weight: 600;
+
+        a { color: inherit; text-decoration: none; }
+    }
+
+    &__text { flex-grow: 1; margin-bottom: 0; color: $gray-600; font-size: 1.0625rem; }
+
+    &__more {
+        display: inline-flex;
+        align-items: center;
+        gap: .375rem;
+        margin-top: 1rem;
+        font-weight: 600;
+        color: $petrol-dark;
+
+        .icon-sm { margin: 0; }
+    }
+
+    &--linked:hover &__more { text-decoration: underline; }
+    &--linked a:focus-visible { outline: none; }
+    &--linked:focus-within { outline: 3px solid $petrol; outline-offset: 2px; }
+}
+
+.feature-grid--icon-cards .feature-card {
+    border: 1px solid $gray-300;
+}
+
+[data-bs-theme='dark'] .feature-card {
+    --bs-card-bg: #{$gray-800};
+    --bs-card-border-color: #{$gray-700};
+
+    .feature-card__icon { background: rgba($white, .08); color: $on-dark-red; }
+    .feature-card__text { color: $gray-300; }
+}
+
+.feature-step {
+    padding: 2rem;
+
+    &__no {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 3.25rem;
+        height: 3.25rem;
+        margin-bottom: 1.25rem;
+        border-radius: 50%;
+        background: $petrol;
+        color: $white;
+        font-family: $headings-font-family;
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+
+    &__title { font-size: 1.375rem; font-weight: 600; margin-bottom: .5rem; }
+    p { color: $gray-600; font-size: 1.0625rem; }
+}
+
+.feature-checks { font-size: 1.0625rem; }
+
+// Job list (App\Elements\ElementJobList)
+.job-card {
+    transition: box-shadow .2s ease;
+
+    &:hover { box-shadow: 0 14px 34px rgba($ink, .12); }
+    &:focus-within { outline: 3px solid $petrol; outline-offset: 2px; }
+
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+
+        @include media-breakpoint-up(md) {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2rem 2.25rem;
+        }
+    }
+
+    &__title {
+        margin-bottom: .5rem;
+        font-size: 1.625rem;
+        font-weight: 600;
+
+        a { color: inherit; text-decoration: none; }
+        a:focus-visible { outline: none; }
+    }
+
+    &__teaser { margin-bottom: .75rem; color: $gray-600; }
+
+    &__facts {
+        display: flex;
+        flex-wrap: wrap;
+        gap: .5rem;
+        margin: 0;
+
+        li {
+            padding: .3rem .8rem;
+            font-size: .9375rem;
+            font-weight: 600;
+            background: $petrol-tint;
+            border-radius: 2rem;
+        }
+    }
+
+    &__cta { flex: none; }
+}
+
+.job-list__empty {
+    padding: 2rem;
+    background: $white;
+    border: 1px dashed $gray-400;
+    border-radius: $border-radius-lg;
+}
+
+// Team
+.team-member {
+    .card-img-top { aspect-ratio: 1; object-fit: cover; }
+
+    &__placeholder {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        aspect-ratio: 16 / 9;
+        background: $petrol-tint;
+        color: $petrol;
+        border-radius: $border-radius-lg $border-radius-lg 0 0;
+
+        .icon { width: 3.5rem; height: 3.5rem; }
+    }
+
+    &__name { margin-bottom: .25rem; font-size: 1.375rem; font-weight: 600; }
+    &__role { margin-bottom: .75rem; font-weight: 600; color: $petrol-dark; }
+    &__bio { color: $gray-600; font-size: 1.0625rem; }
+}
+
+// Testimonials
+.testimonials__summary {
+    font-weight: 600;
+}
+
+.testimonials__stars,
+.testimonial__rating {
+    color: $red-dark;
+    letter-spacing: .1em;
+}
+
+.testimonial {
+    &__quote { font-size: 1.1875rem; line-height: 1.6; }
+    &__quote p { margin: 0; }
+    &__caption { margin-top: 1.25rem; font-weight: 600; }
+    &__context { font-weight: 400; color: $gray-600; }
+}

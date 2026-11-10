@@ -1,0 +1,24 @@
+{
+  "name": "pflegeteam-zukunft",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Frontend build for pflegeteam-zukunft.de (SilverStripe 6, Bootstrap 5, Vite)",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@fontsource/figtree": "^5.3.0",
+    "@fontsource/outfit": "^5.3.0",
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.8"
+  },
+  "devDependencies": {
+    "sass-embedded": "^1.108.1",
+    "vite": "^8.3.7"
+  },
+  "engines": {
+    "node": ">=20.19"
+  }
+}

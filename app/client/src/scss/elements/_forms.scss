@@ -1,0 +1,125 @@
+// silverstripe/userforms (ElementForm) in Bootstrap look – markup stays the module's.
+.form-element__title { margin-bottom: 1.5rem; }
+
+.userform {
+    .userform-fields { display: block; }
+
+    .form-step {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.25rem;
+
+        @include media-breakpoint-up(md) {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            column-gap: 1.25rem;
+        }
+    }
+
+    .field {
+        grid-column: 1 / -1;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        min-width: 0;
+
+        &.field--half {
+            @include media-breakpoint-up(md) { grid-column: span 1; }
+        }
+    }
+
+    label.left,
+    legend.left {
+        @extend .form-label;
+        float: none;
+        width: auto;
+        padding: 0;
+        font-size: 1rem;
+    }
+
+    input.text,
+    input[type='email'],
+    input[type='tel'],
+    input[type='file'],
+    textarea,
+    select {
+        @extend .form-control;
+    }
+
+    select { @extend .form-select; }
+
+    .checkbox input,
+    .optionset input,
+    .checkboxset input {
+        @extend .form-check-input;
+        width: 1.5rem;   // 24 px target (WCAG 2.5.8)
+        height: 1.5rem;
+        margin-top: 0;
+        margin-right: .625rem;
+        flex: none;
+    }
+
+    .optionset .middleColumn,
+    .checkboxset .middleColumn {
+        display: flex;
+        flex-wrap: wrap;
+        gap: .25rem 1.5rem;
+
+        > div { display: flex; align-items: center; min-height: 44px; }
+    }
+
+    .checkbox .middleColumn {
+        display: flex;
+        align-items: flex-start;
+
+        label { font-weight: 400; font-size: 1rem; color: $gray-700; }
+    }
+
+    .right-title {
+        display: block;
+        margin-top: .375rem;
+        font-size: .9375rem;
+        color: $gray-600;
+    }
+
+    .message,
+    span.message.required,
+    label.error,
+    span.error {
+        display: block;
+        margin-top: .375rem;
+        font-size: .9375rem;
+        font-weight: 600;
+        color: $red-dark;
+    }
+
+    p.message:not(:empty) {
+        padding: .875rem 1rem;
+        border-radius: $border-radius;
+        background: $red-tint;
+    }
+
+    .requiredField label.left::after,
+    .requiredField legend.left::after { content: ' *'; color: $red-dark; }
+
+    .btn-toolbar {
+        margin-top: 1.75rem;
+
+        input[type='submit'],
+        button[type='submit'] {
+            @extend .btn;
+            @extend .btn-lg;
+            @extend .btn-primary;
+        }
+    }
+}
+
+.form-accent .userform .btn-toolbar {
+    input[type='submit'],
+    button[type='submit'] { @extend .btn-accent; }
+}
+
+.form-element__complete {
+    padding: 1.5rem;
+    background: $petrol-tint;
+    border-radius: $border-radius-lg;
+}
