@@ -1,36 +1,12 @@
-// Topbar
-.topbar {
-    background: $ink;
-    color: $gray-300;
-    font-size: .9375rem;
-
-    .container { min-height: 44px; }
-    .icon-sm { color: $on-dark-blue; }
-
-    &__jobs {
-        display: inline-flex;
-        align-items: center;
-        gap: .5rem;
-        color: $white;
-        font-weight: 500;
-        text-decoration: none;
-
-        .badge { font-size: .8125rem; }
-        .icon-sm { color: $white; margin: 0; }
-        &:hover, &:focus-visible { color: $white; text-decoration: underline; }
-    }
-}
-
-// Header
+// Header – white, no top bar
 .site-header {
     position: sticky;
     top: 0;
     z-index: $zindex-sticky;
     background: $white;
-    border-bottom: 1px solid $gray-300;
     transition: box-shadow .2s ease;
 
-    &.is-scrolled { box-shadow: 0 6px 24px rgba($ink, .08); }
+    &.is-scrolled { box-shadow: 0 1px 0 $hairline; }
 
     .navbar {
         min-height: var(--pz-header-h);
@@ -40,25 +16,28 @@
     &__logo {
         display: block;
         width: auto;
-        height: 46px;
+        height: 42px;
 
-        @include media-breakpoint-up(lg) { height: 60px; }
+        @include media-breakpoint-up(lg) { height: 56px; }
     }
 
+    .navbar-nav { gap: .25rem 2rem; }
+
     .nav-link {
-        font-weight: 600;
-        color: $ink;
-        min-height: 44px;
         display: inline-flex;
         align-items: center;
-        gap: .4rem;
+        min-height: 44px;
+        padding-inline: 0 !important;
+        font-weight: 500;
+        color: $ink;
 
         &:hover, &:focus-visible { color: $petrol-dark; }
+
         &.active, &[aria-current='page'] {
             color: $petrol-dark;
             text-decoration: underline;
-            text-decoration-thickness: 3px;
-            text-underline-offset: .5em;
+            text-decoration-thickness: 2px;
+            text-underline-offset: .55em;
         }
     }
 
@@ -67,35 +46,42 @@
         align-items: center;
         flex-wrap: wrap;
 
-        > .nav-link:first-child { padding-right: .25rem; }
-        .dropdown-toggle-split { padding-inline: .5rem; border: 0; background: none; text-decoration: none; }
+        .dropdown-toggle-split {
+            padding-inline: .375rem !important;
+            border: 0;
+            background: none;
+            text-decoration: none;
+        }
     }
 
     .dropdown-menu {
-        border-color: $gray-300;
-        border-radius: $border-radius-lg;
-        box-shadow: 0 12px 32px rgba($ink, .12);
-        padding: .5rem;
+        border: 1px solid $hairline;
+        border-radius: 0;
+        box-shadow: 0 16px 40px rgba($ink, .08);
+        padding: .5rem 0;
 
-        .dropdown-item { border-radius: $border-radius-sm; padding: .6rem .9rem; }
+        .dropdown-item { padding: .6rem 1.25rem; }
 
         @include media-breakpoint-down(lg) {
             position: static;
             flex-basis: 100%;
             border: 0;
             box-shadow: none;
-            padding-top: 0;
+            padding: 0 0 .5rem 1rem;
         }
     }
 
     &__phone {
+        display: inline-flex;
         align-items: center;
+        min-height: 44px;
+        margin-top: 1.5rem;
         font-weight: 600;
-        color: $ink;
+        color: $petrol-dark;
         text-decoration: none;
 
-        .icon-sm { color: $petrol; }
-        &:hover { color: $petrol-dark; }
+        @include media-breakpoint-up(lg) { margin: 0 0 0 2rem; }
+        &:hover { color: $ink; }
     }
 
     .offcanvas-body {
@@ -103,74 +89,23 @@
     }
 }
 
-// Sections (ElementHolder)
-.element {
-    position: relative;
-    isolation: isolate;
+.navbar-toggler-clean {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    color: $ink;
+    background: none;
+    border: 0;
+
+    .icon { width: 1.75rem; height: 1.75rem; }
 }
 
-.section--image {
-    background: $ink;
-
-    &::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        z-index: -1;
-        background: rgba($ink, .66);
-    }
-}
-
-.section__bg {
-    position: absolute;
-    inset: 0;
-    z-index: -2;
-
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-}
-
-.bg-dark { background-color: $ink !important; }
-.bg-light { background-color: $gray-100 !important; }
-
-.container-narrow {
-    max-width: 920px;
-}
-
-.section-head {
-    max-width: 760px;
-    margin-bottom: 3rem;
-
-    &__title { margin-bottom: .75rem; }
-    &__intro { margin-bottom: 0; color: $gray-700; font-size: 1.125rem; }
-    [data-bs-theme='dark'] &__intro { color: $gray-300; }
-
-    &--center {
-        margin-inline: auto;
-        text-align: center;
-    }
-
-    &--split {
-        max-width: none;
-
-        @include media-breakpoint-up(lg) {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            gap: 3rem;
-
-            .section-head__text { max-width: 720px; }
-            .section-head__intro, .testimonials__summary { max-width: 440px; margin-bottom: .5rem; }
-        }
-    }
-}
-
-// Breadcrumbs (in hero)
+// Breadcrumbs
 .breadcrumbs {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     font-size: .9375rem;
 
     .breadcrumb-item {
@@ -181,20 +116,18 @@
 
 // Column layouts (ServicePage, JobPage)
 .column-layout {
-    padding-block: 3.5rem 2rem;
+    padding-block: 1rem 5rem;
 
-    @include media-breakpoint-up(lg) { padding-block: 5rem 3rem; }
+    @include media-breakpoint-up(lg) { padding-block: 1rem 8rem; }
 
     &__main {
         display: flex;
         flex-direction: column;
-        gap: 3rem;
+        gap: 3.5rem;
 
-        > .element { padding-block: 0 !important; }
-
-        > .element.bg-light {
-            padding: 2.25rem !important;
-            border-radius: $border-radius-lg;
+        > .element {
+            padding: 0 !important;
+            background: none !important;
         }
 
         .container,
@@ -204,246 +137,203 @@
             padding-inline: 0;
         }
 
-        .section-head { margin-bottom: 1.75rem; }
+        .section-title { font-size: 1.875rem; }
 
-        // blocks fill the main column (no centred/narrow columns inside it)
-        .text-media__body,
-        .faq .col-lg-9,
-        .faq .col-12 {
-            flex: 0 0 100%;
-            max-width: 100%;
-            margin-inline: 0;
-            text-align: left !important;
-        }
-        h2, .section-head__title { font-size: 2rem; }
+        // statements and FAQ stay left-aligned in the column
+        .text-media--statement,
+        .faq__head { max-width: none; margin-inline: 0; text-align: left; }
     }
 }
 
-.job-description {
-    > h2:first-child { margin-top: 0; }
-    h2 + ul, h3 + ul { margin-top: .75rem; }
-}
+.job-description > h2:first-child { margin-top: 0; }
 
 .side-stack {
     position: sticky;
-    top: calc(var(--pz-header-h) + 1.5rem);
+    top: calc(var(--pz-header-h) + 2rem);
     display: grid;
-    gap: 1.25rem;
+    gap: 2.5rem;
 }
 
 .side-nav {
-    overflow: hidden;
-
     &__title {
-        margin: 0;
-        padding: 1rem 1.5rem;
-        background: $ink;
-        color: $white;
+        margin-bottom: .75rem;
+        font-size: 1.125rem;
     }
 
-    ul { padding-block: .5rem; }
+    ul { border-top: 1px solid $hairline; }
+
+    li { border-bottom: 1px solid $hairline; }
 
     a {
         display: block;
-        padding: .625rem 1.5rem;
-        color: $ink;
+        padding: .75rem 0;
+        color: $text;
         text-decoration: none;
-        border-left: 3px solid transparent;
 
         &:hover { color: $petrol-dark; }
-
-        &.active {
-            color: $petrol-dark;
-            font-weight: 600;
-            border-left-color: $petrol;
-        }
+        &.active { color: $petrol-dark; font-weight: 600; }
     }
 }
 
-.side-cta {
-    border: 0;
-
-    p { color: $white; }
-    .opening-hours { font-size: 1rem; }
-}
-
-.side-jobs {
-    display: grid;
-    gap: .25rem;
-    padding: 1.5rem;
-    color: $ink;
-    text-decoration: none;
-    border-top: 4px solid $red;
-
-    &__badge { font-size: .875rem; font-weight: 600; color: $red-dark; }
-    &__title { font-family: $headings-font-family; font-size: 1.25rem; font-weight: 600; line-height: 1.25; }
-    &__more { margin-top: .5rem; font-weight: 600; color: $red-dark; }
-    &:hover { color: $ink; box-shadow: 0 10px 28px rgba($ink, .1); }
-}
-
-.job-facts {
-    &__list { display: grid; gap: .875rem; }
+.side-facts {
+    dl { border-top: 1px solid $hairline; }
 
     &__row {
+        padding: .75rem 0;
+        border-bottom: 1px solid $hairline;
+
         dt { font-size: .9375rem; font-weight: 500; color: $gray-600; }
-        dd { margin: 0; font-weight: 600; }
-        .icon-sm { color: $petrol; }
+        dd { margin: 0; font-weight: 600; color: $ink; }
     }
 }
 
-// Contact + application
-.contact-details {
-    display: grid;
-    gap: 1.25rem;
-    margin-bottom: 2rem;
-
-    > div > dt { font-weight: 600; }
-    > div > dd { margin: 0; color: $gray-700; }
-}
-
-.map-consent {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    min-height: 280px;
-    padding: 1.5rem;
-    text-align: center;
-    background: $gray-100;
-    border-radius: $border-radius-lg;
-
-    p { max-width: 340px; margin: 0; font-size: .9375rem; color: $gray-700; }
-
-    iframe {
-        width: 100%;
-        height: 320px;
-        border: 0;
-        border-radius: $border-radius-lg;
-    }
-
-    &.is-loaded { padding: 0; background: none; }
-}
-
-.apply-card {
+.side-box {
     padding: 1.75rem;
-    background: $white;
-    border: 1px solid $gray-300;
-    border-radius: $border-radius-lg;
+    background: $gray-100;
 
-    @include media-breakpoint-up(lg) { padding: 2.75rem; }
+    &__title { margin-bottom: .5rem; font-size: 1.25rem; }
 
-    .element { padding: 0 !important; background: none !important; }
-    .container, .container-narrow { padding: 0; max-width: none; }
+    &__phone {
+        display: inline-block;
+        font-size: 1.375rem;
+        font-weight: 600;
+        color: $petrol-dark;
+        text-decoration: none;
+
+        &:hover { color: $ink; }
+    }
 }
 
-.apply-section { background: $gray-100; }
+.side-hiring { font-size: 1rem; }
+.side-hiring .kicker { display: inline; }
 
+// Application (CareerPage)
 .apply-aside {
     &__image {
         width: 100%;
         height: auto;
         margin-bottom: 1.5rem;
-        border-radius: $border-radius-lg;
     }
-
-    p { color: $gray-700; }
 }
 
 .apply-steps {
-    display: grid;
-    gap: 1rem;
     margin: 2rem 0 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: step;
+    border-top: 1px solid $hairline;
 
     li {
-        display: flex;
-        align-items: center;
-        gap: .875rem;
-        font-weight: 500;
-    }
+        padding: .75rem 0;
+        border-bottom: 1px solid $hairline;
+        counter-increment: step;
 
-    &__no {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 2.25rem;
-        height: 2.25rem;
-        flex: none;
-        border-radius: 50%;
-        background: $red;
-        color: $white;
-        font-family: $headings-font-family;
-        font-weight: 700;
+        &::before {
+            content: counter(step) '.';
+            margin-right: .75rem;
+            font-weight: 600;
+            color: $petrol-dark;
+        }
     }
 }
 
-// Footer
-.site-footer {
-    background: $ink;
-    color: $gray-300;
-    font-size: 1rem;
-    padding-top: 5rem;
+// Contact page
+.contact-details {
+    display: grid;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
 
-    @include media-breakpoint-down(md) { padding-bottom: 5.5rem; } // room for action bar
+    > div > dt { font-size: 1rem; font-weight: 600; color: $ink; }
+    > div > dd { margin: 0; }
+}
 
-    &__main {
-        padding-bottom: 3rem;
-        border-bottom: 1px solid $gray-800;
+.map-consent {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: $gray-100;
+
+    p { margin: 0; font-size: 1rem; }
+
+    iframe {
+        width: 100%;
+        height: 320px;
+        border: 0;
     }
 
-    &__logo { width: auto; height: 60px; }
-    &__seal { margin-top: .5rem; }
+    &.is-loaded { padding: 0; background: none; }
+}
+
+// Contact strip above the footer
+.contact-strip {
+    padding-block: 5rem;
+    border-top: 1px solid $hairline;
+
+    @include media-breakpoint-up(lg) { padding-block: 7rem; }
 
     &__title {
-        margin-bottom: 1rem;
-        font-size: 1.1875rem;
-        color: $white;
+        margin-bottom: 2.5rem;
+        font-size: calc(1.4rem + 1vw);
 
-        a { color: inherit; text-decoration: none; }
+        @include media-breakpoint-up(xl) { font-size: $h2-font-size; }
     }
 
-    a {
-        color: $gray-300;
+    &__label {
+        margin-bottom: .375rem;
+        font-weight: 600;
+        color: $ink;
+    }
+
+    &__phone {
+        font-size: 1.625rem;
+        font-weight: 600;
+        color: $petrol-dark;
         text-decoration: none;
 
-        &:hover { color: $white; text-decoration: underline; }
+        &:hover { color: $ink; }
     }
 
     address { font-style: normal; }
-
-    &__contact li,
-    &__links li { margin-bottom: .375rem; }
-
-    &__contact .icon-sm { color: $on-dark-blue; }
-
-    &__jobs {
-        display: inline-flex;
-        align-items: center;
-        gap: .25rem;
-        margin-top: 1.25rem;
-        font-weight: 600;
-        color: $on-dark-red !important;
-
-        .icon-sm { margin: 0; }
-    }
-
-    &__bottom {
-        padding-block: 1.5rem;
-        font-size: .9375rem;
-        color: $gray-400;
-    }
 }
 
-// Mobile sticky action bar
-.action-bar {
-    position: fixed;
-    inset: auto 0 0;
-    z-index: $zindex-fixed;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: .625rem;
-    padding: .625rem 1rem calc(.625rem + env(safe-area-inset-bottom));
-    background: $white;
-    border-top: 1px solid $gray-300;
-    box-shadow: 0 -6px 20px rgba($ink, .1);
+// Footer – light and quiet
+.site-footer {
+    padding-block: 3.5rem 2.5rem;
+    background: $gray-100;
+    font-size: 1rem;
+
+    &__main {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 2rem 3rem;
+    }
+
+    &__logo { width: auto; height: 44px; }
+
+    &__links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: .25rem 1.75rem;
+        margin: 0;
+
+        a {
+            display: inline-flex;
+            align-items: center;
+            min-height: 44px;
+            color: $text;
+            text-decoration: none;
+
+            &:hover { color: $petrol-dark; text-decoration: underline; }
+        }
+    }
+
+    &__meta {
+        margin: 2rem 0 0;
+        font-size: .9375rem;
+        color: $gray-600;
+    }
 }

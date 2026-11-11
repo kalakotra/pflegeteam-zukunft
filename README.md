@@ -3,6 +3,9 @@
 Relaunch der Website der **Pflegeteam Zukunft GmbH** (ambulanter Pflegedienst, Hamburg) auf SilverStripe 6.3
 mit Elemental, Bootstrap 5.3 und Vite. Eine Sprache (de_DE), kein Fluent.
 
+**Versionen:** `1.0.0` = erstes Design (Karten, dunkle Bänder). `2.0.0` = ruhiges „clean“-Design: eine Schrift (Figtree),
+Weiß + helles Grau, Listen mit Haarlinien statt Karten, Vollbild-Hero mit Textfeld, Kontaktstreifen über dem Footer.
+
 - Theme: `themes/ptzukunft` (Templates + Bilder)
 - Frontend-Quellen: `app/client/src` → Build nach `app/client/dist`
 - Inhaltsblöcke: [`youwilllikeit/silverstripe-elements`](https://github.com/you-will-like-it/silverstripe-elements) 2.x
@@ -51,4 +54,5 @@ Kontaktdaten, Bürozeiten, Job-Hinweis („Wir stellen ein“) und Schema-Typ pf
 - [ ] Testmail beider Formulare (Kontakt, Kurzbewerbung)
 - [ ] Weiterleitungen testen: `/web/`, `/team/`, `/stellenangebote/`, `/pflegeberatung/`
 - [ ] Search Console: `https://www.pflegeteam-zukunft.de/sitemap.xml` einreichen; Google for Jobs im Rich-Results-Test prüfen
-- [ ] Lighthouse + axe auf Staging (Preview-Werte: Mobil 100/100/100/100, axe 0 Verstöße)
+- [ ] Lighthouse + axe auf Staging (Preview-Werte 2.0.0: Mobil 100/100/100/100, axe 0 Verstöße)
+- [ ] Hero-Fotos Startseite/Karriere im Querformat, Motiv rechts (links unten liegt das Textfeld)

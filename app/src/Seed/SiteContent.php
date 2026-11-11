@@ -19,7 +19,6 @@ use SilverStripe\UserForms\Model\EditableFormField\EditableEmailField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableFileField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableRadioField;
 use SilverStripe\UserForms\Model\EditableFormField\EditableTextField;
-use YouWillLikeIT\Elements\Elements\ElementCallToAction;
 use YouWillLikeIT\Elements\Elements\ElementFaq;
 use YouWillLikeIT\Elements\Elements\ElementFeatureGrid;
 use YouWillLikeIT\Elements\Elements\ElementHero;
@@ -201,6 +200,7 @@ final class SiteContent
                 'image' => ['ContactImage', 'karriere-ansprechperson.jpg', 'Ansprechperson für Bewerbungen im Büro des Pflegeteams Zukunft'],
                 'fields' => [
                     'Title' => 'Karriere',
+                    'MenuTitle' => 'Stellenangebote',
                     'MetaTitle' => 'Pflegedienst Jobs Hamburg – Karriere beim Pflegeteam Zukunft',
                     'MetaDescription' => 'Jobs im ambulanten Pflegedienst in Hamburg: Pflegefachkraft und Pflegeassistenz (m/w/d) in Voll- oder Teilzeit. Jetzt in 2 Minuten bewerben.',
                     'ApplyAsideTitle' => 'Lieber direkt sprechen?',
@@ -292,179 +292,134 @@ final class SiteContent
      */
     public static function blocks(): array
     {
-        $phoneLink = ['phone' => self::PHONE_E164, 'text' => self::PHONE . ' anrufen'];
-
         return [
             'home' => [
                 'ElementalArea' => [
                     [
                         'type' => ElementHero::class,
                         'fields' => [
-                            'Title' => 'Gut versorgt zu Hause – mit einem Team, das Ihre Sprache spricht.',
+                            'Title' => 'Ambulante Pflege in Hamburg – damit Zuhause Zuhause bleibt.',
                             'HeadingLevel' => 'h1',
-                            'Eyebrow' => 'Ambulanter Pflegedienst in Hamburg',
-                            'Lead' => 'Als ambulanter Pflegedienst in Hamburg übernehmen wir Grundpflege, Behandlungspflege und Entlastung im Alltag. Die Abrechnung mit Pflege- und Krankenkasse erledigen wir für Sie.',
-                            'Variant' => 'home',
+                            'Lead' => 'Wir pflegen, versorgen und entlasten. In Ihrer Wohnung, in Ihrem Rhythmus.',
+                            'Variant' => 'image',
                             'ShowBreadcrumbs' => false,
-                            'TrustItems' => "MD-Prüfung 2025: Note 1,5\nVertragspartner aller Kassen\n8 Sprachen im Team",
-                            'TeaserBadge' => 'Wir stellen ein',
-                            'TeaserTitle' => 'Pflegefachkräfte & Pflegeassistenz (m/w/d)',
-                            'TeaserText' => 'Vollzeit oder Teilzeit · Hamburg',
                             'Spacing' => 'none',
                         ],
-                        'images' => ['Image' => ['startseite-hero.jpg', 'Pflegerin lacht mit einem älteren Herrn am Küchentisch in seiner Hamburger Wohnung']],
-                        'teaserLink' => ['page' => 'karriere', 'text' => 'Offene Stellen ansehen'],
+                        'images' => ['Image' => ['startseite-hero.jpg', 'Ältere Frau lacht mit ihrer Pflegerin auf dem Balkon einer Hamburger Altbauwohnung']],
                         'links' => [
                             ['page' => 'kontakt', 'text' => 'Pflege anfragen'],
-                            $phoneLink,
-                        ],
-                    ],
-                    [
-                        'type' => ElementFeatureGrid::class,
-                        'fields' => [
-                            'Title' => 'Unsere Pflege – so viel Hilfe, wie Sie brauchen',
-                            'Eyebrow' => 'Leistungen',
-                            'Intro' => 'Von der Körperpflege bis zur ärztlich verordneten Behandlung – alles aus einer Hand, abgerechnet mit Ihrer Kasse.',
-                            'Variant' => 'image-cards',
-                            'Columns' => '3',
-                            'HeaderAlign' => 'split',
-                        ],
-                        'items' => [
-                            ['title' => 'Grundpflege', 'text' => 'Körperpflege, Anziehen, Mobilität und Mahlzeiten – mit Ruhe und Respekt.', 'image' => ['leistung-grundpflege.jpg', 'Pflegerin hilft einer älteren Dame beim Anziehen einer Strickjacke'], 'link' => ['page' => 'grundpflege', 'text' => 'Mehr zur Grundpflege']],
-                            ['title' => 'Behandlungspflege', 'text' => 'Medikamente, Verbandswechsel, Injektionen und Kompression – nach ärztlicher Verordnung.', 'image' => ['leistung-behandlungspflege.jpg', 'Pflegefachkraft misst bei einem älteren Herrn zu Hause den Blutzucker'], 'link' => ['page' => 'behandlungspflege', 'text' => 'Mehr zur Behandlungspflege']],
-                            ['title' => 'Betreuung & Entlastung', 'text' => 'Haushalt, Einkäufe und Arztbegleitung – über den Entlastungsbetrag nach § 45b SGB XI.', 'image' => ['leistung-entlastung.jpg', 'Betreuungskraft begleitet eine Seniorin beim Einkauf auf dem Wochenmarkt'], 'link' => ['page' => 'betreuung-entlastung', 'text' => 'Mehr zu Betreuung & Entlastung']],
-                            ['title' => 'Verhinderungspflege', 'text' => 'Pflegende Angehörige brauchen Pausen – wir übernehmen, ohne Lücke.', 'image' => ['leistung-verhinderungspflege.jpg', 'Pflegekraft und Tochter eines Pflegebedürftigen besprechen die Vertretung'], 'link' => ['page' => 'verhinderungspflege', 'text' => 'Mehr zur Verhinderungspflege']],
-                            ['title' => 'Pflegeberatung', 'text' => 'Beratungsbesuche nach § 37 Abs. 3 und kostenlose Erstberatung zu Pflegegrad und Kasse.', 'image' => ['leistung-pflegeberatung.jpg', 'Pflegeberaterin spricht mit einem älteren Ehepaar am Wohnzimmertisch'], 'link' => ['page' => 'pflegeberatung', 'text' => 'Mehr zur Pflegeberatung']],
-                            ['title' => 'Alles, was den Alltag leichter macht', 'text' => 'Arztbegleitung, Hilfe bei Anträgen, Medikamente besorgen, Hausnotruf und Menüdienst vermitteln.', 'image' => ['leistung-alltag.jpg', 'Pflegekraft und Senior füllen gemeinsam einen Antrag aus'], 'link' => ['page' => 'leistungen', 'text' => 'Alle Leistungen ansehen']],
-                        ],
-                    ],
-                    [
-                        'type' => ElementFeatureGrid::class,
-                        'fields' => [
-                            'Title' => 'In drei Schritten zu Ihrer Pflege',
-                            'Eyebrow' => 'So einfach geht’s',
-                            'Variant' => 'steps',
-                            'Columns' => '3',
-                            'HeaderAlign' => 'center',
-                            'Background' => 'light',
-                        ],
-                        'items' => [
-                            ['title' => 'Anrufen oder anfragen', 'text' => 'Sie erreichen uns Montag bis Freitag von 8 bis 16 Uhr – oder schreiben uns über das Kontaktformular.'],
-                            ['title' => 'Beratung bei Ihnen zu Hause', 'text' => 'Wir besprechen, was Sie brauchen, und erstellen vorab einen Kostenvoranschlag.'],
-                            ['title' => 'Pflege beginnt', 'text' => 'Ein überschaubarer, fester Kreis von Pflegekräften kommt zu Ihnen. Die Abrechnung übernehmen wir.'],
+                            ['phone' => self::PHONE_E164, 'text' => self::PHONE],
                         ],
                     ],
                     [
                         'type' => ElementTextMedia::class,
                         'fields' => [
-                            'Title' => 'Pflege mit Zukunft – auch für dich.',
-                            'Eyebrow' => 'Karriere',
-                            'Content' => '<p>Wir suchen Pflegefachkräfte und Pflegeassistenz (m/w/d), die gerne mit Menschen arbeiten. Berufseinsteiger:innen sind genauso willkommen wie erfahrene Kolleg:innen.</p><ul class="list-check"><li>Voll- oder Teilzeit nach Wunsch</li><li>Leistungsgerechte Vergütung</li><li>Fester Ansprechpartner</li><li>Großzügige Urlaubsregelung</li><li>Fort- und Weiterbildung</li><li>Team aus vielen Kulturen</li></ul>',
-                            'ImagePosition' => 'left',
-                            'Background' => 'dark',
+                            'Title' => 'So nah wie nötig. So selbstständig wie möglich.',
+                            'Content' => '<p>Das Pflegeteam Zukunft ist ein ambulanter Pflegedienst in Hamburg und betreut seit vielen Jahren Menschen im Hamburger Osten, die im Alltag Hilfe brauchen. Unsere examinierten Pflegekräfte nehmen sich Zeit – für Sie und für Ihre Angehörigen. Die Abrechnung mit Pflege- und Krankenkasse übernehmen wir.</p>',
+                            'Spacing' => 'md',
                         ],
-                        'images' => ['Image' => ['karriere-team.jpg', 'Zwei Pflegekräfte im Gespräch vor dem Dienstwagen, beide lachen']],
+                    ],
+                    [
+                        'type' => ElementFeatureGrid::class,
+                        'fields' => [
+                            'Title' => 'Unsere Leistungen',
+                            'Intro' => 'Von der Körperpflege bis zur Verordnung Ihrer Ärztin – alles aus einer Hand.',
+                            'Variant' => 'list',
+                            'Layout' => 'side',
+                        ],
+                        'items' => [
+                            ['title' => 'Grundpflege', 'text' => 'Körperpflege, Anziehen, Mobilität und Mahlzeiten.', 'link' => ['page' => 'grundpflege', 'text' => 'Grundpflege']],
+                            ['title' => 'Behandlungspflege', 'text' => 'Medikamente, Verbände, Injektionen – nach ärztlicher Verordnung.', 'link' => ['page' => 'behandlungspflege', 'text' => 'Behandlungspflege']],
+                            ['title' => 'Betreuung & Entlastung', 'text' => 'Haushalt, Einkäufe, Arztbegleitung – über den Entlastungsbetrag.', 'link' => ['page' => 'betreuung-entlastung', 'text' => 'Betreuung & Entlastung']],
+                            ['title' => 'Verhinderungspflege', 'text' => 'Wenn pflegende Angehörige eine Pause brauchen.', 'link' => ['page' => 'verhinderungspflege', 'text' => 'Verhinderungspflege']],
+                            ['title' => 'Pflegeberatung', 'text' => 'Beratungsbesuch nach § 37 Abs. 3 und kostenlose Erstberatung.', 'link' => ['page' => 'pflegeberatung', 'text' => 'Pflegeberatung']],
+                        ],
                         'links' => [
-                            ['page' => 'karriere', 'text' => 'Offene Stellen ansehen'],
-                            ['page' => 'karriere', 'anchor' => CareerPage::APPLY_ANCHOR, 'text' => 'In 2 Minuten bewerben'],
+                            ['page' => 'leistungen', 'text' => 'Alle Leistungen'],
                         ],
                     ],
                     [
                         'type' => ElementTextMedia::class,
                         'fields' => [
                             'Title' => 'Wir sprechen Ihre Sprache.',
-                            'Eyebrow' => 'Über uns',
-                            'Content' => '<p>Unser Team kommt aus vielen Ländern. Das macht Pflege einfacher – für Pflegebedürftige und für Angehörige, die mitreden wollen.</p>',
-                            'Chips' => "Deutsch\nEnglisch\nBosnisch\nKroatisch\nSerbisch\nMazedonisch\nRussisch\nLitauisch",
-                            'ImagePosition' => 'right',
-                            'CardEyebrow' => 'Qualitätsprüfung des Medizinischen Dienstes · 04.09.2025',
-                            'CardValue' => '1,5',
-                            'CardLabel' => 'Gesamtnote „gut“',
-                            'CardRows' => "Pflegerische Leistungen | 1,6\nÄrztlich verordnete Leistungen | 2,0\nDienstleistung & Organisation | 1,0\nBefragung der Pflegebedürftigen | 1,2",
+                            'Content' => '<p>Unser Team kommt aus vielen Ländern. Mit uns können Sie Deutsch sprechen – und ebenso Englisch, Bosnisch, Kroatisch, Serbisch, Mazedonisch, Russisch oder Litauisch.</p><p>Der Medizinische Dienst hat uns im September 2025 geprüft: Gesamtnote <strong>1,5 („gut“)</strong>.</p>',
+                            'ImagePosition' => 'left',
                         ],
-                        'cardLink' => ['url' => 'https://www.pflegesuche.de/pflegedienst-qualitaetsbericht/MDK-pflegeteam-zukunft-gmbh_41026.pdf', 'text' => 'Transparenzbericht ansehen (PDF)', 'newWindow' => true],
+                        'images' => ['Image' => ['startseite-sprache.jpg', 'Pflegekraft und älterer Herr im Gespräch am Küchentisch']],
                         'links' => [
-                            ['page' => 'ueber-uns', 'text' => 'Unser Team kennenlernen'],
+                            ['page' => 'ueber-uns', 'text' => 'Unser Team'],
+                            ['url' => 'https://www.pflegesuche.de/pflegedienst-qualitaetsbericht/MDK-pflegeteam-zukunft-gmbh_41026.pdf', 'text' => 'Transparenzbericht (PDF)', 'newWindow' => true],
                         ],
                     ],
                     [
                         'type' => ElementTestimonials::class,
                         'fields' => [
-                            'Title' => 'Das sagen Familien über uns',
-                            'RatingSummary' => '5,0 bei Google',
+                            'Title' => 'Das sagen Angehörige',
+                            'Variant' => 'single',
                             'Background' => 'light',
                         ],
                         'items' => [
-                            ['Quote' => 'Ein herzlicher, kompetenter Pflegedienst mit sehr tollen Mitarbeitern. Meine Großeltern werden vom Pflegeteam betreut – es ist jedes Mal eine Freude zu hören, wie glücklich und zufrieden sie mit der Betreuung sind.', 'Author' => 'Ammar B.', 'Context' => 'Angehöriger', 'Source' => 'Google', 'Rating' => 5, 'IncludeInSchema' => false],
-                            ['Quote' => 'Sehr guter Pflegedienst, Mitarbeiter und Chef sind sehr zuvorkommend und freundlich.', 'Author' => 'Carlos H.', 'Source' => 'Google', 'Rating' => 5, 'IncludeInSchema' => false],
+                            ['Quote' => 'Meine Großeltern werden vom Pflegeteam betreut – es ist jedes Mal eine Freude zu hören, wie zufrieden sie sind.', 'Author' => 'Ammar B.', 'Context' => 'Angehöriger', 'Source' => 'Google-Bewertung', 'Rating' => 5, 'IncludeInSchema' => false],
                         ],
                     ],
                     [
                         'type' => ElementFaq::class,
                         'fields' => [
-                            'Title' => 'Gut zu wissen, bevor es losgeht',
-                            'Eyebrow' => 'Häufige Fragen',
-                            'Intro' => '<p>Wir sind vor allem im Hamburger Osten und in der Innenstadt unterwegs: Hamm, Borgfelde, St. Georg, Hohenfelde, Eilbek, Horn, Wandsbek und Barmbek. Wohnen Sie woanders? Fragen Sie uns einfach.</p>',
-                            'Layout' => 'intro-left',
-                            'SideImageAlt' => 'Karte des Einsatzgebiets im Hamburger Osten rund um die Bürgerweide',
+                            'Title' => 'Wann ist ambulante Pflege sinnvoll?',
+                            'Intro' => '<p>Wenn der Alltag allein nicht mehr ganz klappt – und Sie trotzdem zu Hause bleiben möchten.</p>',
                         ],
-                        'sideImage' => ['einsatzgebiet-karte.png', 'Karte des Einsatzgebiets im Hamburger Osten rund um die Bürgerweide'],
                         'items' => [
                             ['Was kostet ambulante Pflege?', 'Mit Pflegegrad übernimmt die Pflegekasse einen großen Teil über die Pflegesachleistung; ärztlich verordnete Behandlungspflege zahlt die Krankenkasse. Vorab bekommen Sie von uns einen Kostenvoranschlag – ohne Überraschungen.'],
                             ['Brauche ich einen Pflegegrad?', 'Für Behandlungspflege genügt eine ärztliche Verordnung. Für Grundpflege, Entlastung und Verhinderungspflege brauchen Sie einen Pflegegrad. Wir helfen Ihnen beim Antrag bei Ihrer Pflegekasse.'],
                             ['Wie schnell kann die Pflege beginnen?', 'Rufen Sie uns an: Wir vereinbaren zeitnah einen Beratungstermin bei Ihnen zu Hause und sagen Ihnen dabei, ab wann wir freie Kapazitäten haben.'],
-                            ['Pflegen Sie auch Menschen mit Demenz?', 'Ja. Wir richten uns nach der Lebensgeschichte und den Gewohnheiten der Menschen, die wir pflegen, und beziehen die Angehörigen mit ein.'],
+                            ['In welchen Stadtteilen sind Sie unterwegs?', 'Vor allem im Hamburger Osten und in der Innenstadt: Hamm, Borgfelde, St. Georg, Hohenfelde, Eilbek, Horn, Wandsbek und Barmbek. Wohnen Sie woanders? Fragen Sie uns einfach.'],
                             ['Kommt immer dieselbe Pflegekraft?', 'Wir planen die Einsätze so, dass ein überschaubarer, fester Kreis von Pflegekräften zu Ihnen kommt und die Zeiten mit Ihnen abgestimmt sind.'],
                         ],
                     ],
                     [
-                        'type' => ElementCallToAction::class,
+                        'type' => ElementTextMedia::class,
                         'fields' => [
-                            'Title' => 'Fragen zur Pflege? Wir beraten Sie kostenlos.',
-                            'Content' => 'Montag bis Freitag von 8 bis 16 Uhr – auf Deutsch, Bosnisch, Russisch und in weiteren Sprachen.',
-                            'Variant' => 'boxed',
-                            'Spacing' => 'md',
+                            'Eyebrow' => 'Wir stellen ein',
+                            'Title' => 'Pflege mit Zukunft – auch für Sie.',
+                            'Content' => '<p>Wir suchen Pflegefachkräfte und Pflegeassistenz (m/w/d) in Voll- oder Teilzeit. Feste Touren, ein Team, das zusammenhält, und eine Bewerbung in zwei Minuten.</p>',
+                            'ImagePosition' => 'right',
                         ],
+                        'images' => ['Image' => ['karriere-team.jpg', 'Zwei Pflegekräfte lachen auf dem Weg zum nächsten Einsatz']],
                         'links' => [
-                            ['phone' => self::PHONE_E164, 'text' => self::PHONE],
-                            ['page' => 'kontakt', 'text' => 'Rückruf anfordern'],
+                            ['page' => 'karriere', 'text' => 'Stellenangebote ansehen'],
                         ],
                     ],
                 ],
             ],
             'leistungen' => [
                 'ElementalArea' => [
-                    self::hero('Leistungen in der ambulanten Pflege in Hamburg', 'Was wir für Sie tun', 'Wir pflegen, versorgen und entlasten – genau so viel, wie Sie brauchen. Die Leistungen rechnen wir direkt mit Ihrer Pflege- oder Krankenkasse ab.', ['leistungen-hero.jpg', 'Pflegekraft und Seniorin lachen gemeinsam auf dem Sofa'], [['page' => 'kontakt', 'text' => 'Pflege anfragen'], $phoneLink]),
+                    self::hero('Leistungen der ambulanten Pflege in Hamburg', 'Wir pflegen, versorgen und entlasten – genau so viel, wie Sie brauchen. Die Leistungen rechnen wir direkt mit Ihrer Pflege- oder Krankenkasse ab.', ['leistungen-hero.jpg', 'Pflegekraft und Seniorin lachen gemeinsam auf dem Sofa'], [['page' => 'kontakt', 'text' => 'Pflege anfragen']]),
                     [
                         'type' => ElementFeatureGrid::class,
                         'fields' => [
-                            'Title' => 'Was wir zusätzlich für Sie übernehmen',
-                            'Eyebrow' => 'Mehr Lebensqualität',
-                            'Intro' => 'Über die Pflege hinaus erleichtern wir Ihren Alltag – viele dieser Hilfen lassen sich über den Entlastungsbetrag abrechnen.',
-                            'Variant' => 'icon-cards',
-                            'Columns' => '3',
-                            'Background' => 'light',
+                            'Title' => 'Was wir zusätzlich übernehmen',
+                            'Intro' => 'Viele dieser Hilfen lassen sich über den Entlastungsbetrag abrechnen.',
+                            'Variant' => 'columns',
+                            'Layout' => 'side',
                         ],
                         'items' => [
-                            ['title' => 'Begleitung zu Ärzten', 'text' => 'Wir bringen Sie sicher und pünktlich zu Arztterminen, Therapien und Behörden.', 'icon' => 'hand'],
-                            ['title' => 'Hilfe bei Anträgen', 'text' => 'Pflegegrad, Hilfsmittel, Kostenübernahme: Wir unterstützen beim Ausfüllen und Einreichen.', 'icon' => 'shield'],
-                            ['title' => 'Einkäufe', 'text' => 'Wir begleiten Sie beim Einkaufen oder erledigen die Einkäufe für Sie.', 'icon' => 'cart'],
-                            ['title' => 'Medikamente besorgen', 'text' => 'Wir sorgen dafür, dass Ihre Medikamente rechtzeitig da sind.', 'icon' => 'pill'],
-                            ['title' => 'Vermittlung von Diensten', 'text' => 'Fußpflege, Friseur, Menüdienst und Hausnotruf – wir stellen den Kontakt her.', 'icon' => 'phone'],
-                            ['title' => 'Freizeit gestalten', 'text' => 'Spaziergänge, Vorlesen, Gespräche: Zeit für das, was Ihnen Freude macht.', 'icon' => 'sun'],
+                            ['title' => 'Begleitung zu Ärzten', 'text' => 'Sicher und pünktlich zu Arztterminen, Therapien und Behörden.'],
+                            ['title' => 'Hilfe bei Anträgen', 'text' => 'Pflegegrad, Hilfsmittel, Kostenübernahme.'],
+                            ['title' => 'Einkäufe', 'text' => 'Gemeinsam einkaufen oder Einkäufe erledigen.'],
+                            ['title' => 'Medikamente besorgen', 'text' => 'Damit alles rechtzeitig da ist.'],
+                            ['title' => 'Vermittlung von Diensten', 'text' => 'Fußpflege, Friseur, Menüdienst, Hausnotruf.'],
+                            ['title' => 'Freizeit gestalten', 'text' => 'Spaziergänge, Vorlesen, Gespräche.'],
                         ],
                     ],
                     self::faq('Häufige Fragen zu unseren Leistungen', [
                         ['Wer bezahlt die Pflege?', 'Grundpflege, Betreuung und Verhinderungspflege bezahlt die Pflegekasse, sobald ein Pflegegrad vorliegt. Behandlungspflege bezahlt die Krankenkasse auf ärztliche Verordnung. Wir rechnen direkt mit der Kasse ab und informieren Sie vorab über einen möglichen Eigenanteil.'],
                         ['Kann ich Leistungen kombinieren?', 'Ja. Häufig ergänzen sich Grundpflege, Behandlungspflege und Entlastung. Im Beratungsgespräch stellen wir mit Ihnen das passende Paket zusammen.'],
                         ['Arbeiten Sie mit Ärzten zusammen?', 'Ja, wir stimmen uns bei Behandlungspflege eng mit Ihrer Ärztin oder Ihrem Arzt und mit Therapeut:innen ab.'],
-                    ]),
-                    self::cta(),
+                    ], 'light'),
                 ],
             ],
             'grundpflege' => self::servicePage(
                 'Grundpflege zu Hause in Hamburg',
-                'Pflegekasse · SGB XI',
                 'Hilfe bei der Körperpflege, beim Anziehen, bei der Mobilität und beim Essen – damit Sie so lange wie möglich selbstbestimmt zu Hause leben.',
                 ['grundpflege-hero.jpg', 'Pflegerin hilft einer älteren Dame beim Aufstehen aus dem Sessel'],
                 '<p>Grundpflege umfasst alle Hilfen, die Sie täglich brauchen, um sich in Ihrer Wohnung wohl und sicher zu fühlen. Unsere Pflegekräfte richten sich nach Ihren Gewohnheiten und Wünschen – ob Sie lieber morgens duschen oder abends.</p><p>Die Grundpflege wird über die Pflegesachleistung Ihrer Pflegekasse abgerechnet, sobald ein Pflegegrad vorliegt. Wir erstellen vorab einen Kostenvoranschlag.</p>',
@@ -483,7 +438,6 @@ final class SiteContent
             ),
             'behandlungspflege' => self::servicePage(
                 'Behandlungspflege in Hamburg – sicher zu Hause versorgt',
-                'Ärztlich verordnet · SGB V',
                 'Medikamente, Verbände, Injektionen und Kompression nach Verordnung Ihrer Ärztin oder Ihres Arztes. Die Kosten trägt die Krankenkasse.',
                 ['behandlungspflege-hero.jpg', 'Pflegefachkraft wechselt einen Verband am Unterschenkel eines Seniors im Wohnzimmer'],
                 '<p>Behandlungspflege umfasst alle medizinischen Maßnahmen, die eine Ärztin oder ein Arzt verordnet und die unsere examinierten Pflegefachkräfte bei Ihnen zu Hause durchführen. So vermeiden Sie Wege in die Praxis – oder einen Krankenhausaufenthalt.</p><p>Die Kosten trägt Ihre Krankenkasse (häusliche Krankenpflege nach § 37 SGB V). Bei Fragen zur Verordnung stimmen wir uns direkt mit der Praxis ab.</p>',
@@ -502,7 +456,6 @@ final class SiteContent
             ),
             'betreuung-entlastung' => self::servicePage(
                 'Betreuung und Entlastung im Alltag',
-                'Entlastungsbetrag · § 45b SGB XI',
                 'Haushalt, Einkäufe, Begleitung zum Arzt oder einfach Gesellschaft – finanziert über den Entlastungsbetrag Ihrer Pflegekasse.',
                 ['entlastung-hero.jpg', 'Betreuungskraft und Seniorin spielen gemeinsam ein Brettspiel am Tisch'],
                 '<p>Ab Pflegegrad 1 steht Ihnen monatlich ein Entlastungsbetrag nach § 45b SGB XI zu. Damit können Sie Hilfen im Alltag finanzieren, die pflegende Angehörige entlasten und Ihre Selbstständigkeit fördern.</p><p>Nicht genutzte Beträge verfallen nicht sofort – wir beraten Sie, wie Sie den Anspruch am besten nutzen.</p>',
@@ -521,7 +474,6 @@ final class SiteContent
             ),
             'verhinderungspflege' => self::servicePage(
                 'Verhinderungspflege in Hamburg',
-                'Pflegekasse · § 39 SGB XI',
                 'Wenn pflegende Angehörige Urlaub brauchen oder krank sind, übernehmen wir die Pflege zu Hause – stundenweise oder für mehrere Wochen.',
                 ['verhinderungspflege-hero.jpg', 'Tochter verabschiedet sich mit Koffer, Pflegekraft sitzt bei der Mutter'],
                 '<p>Pflegende Angehörige leisten jeden Tag viel. Damit Sie selbst gesund bleiben, zahlt die Pflegekasse eine Vertretung: die Verhinderungspflege. Wir übernehmen in dieser Zeit die Pflege und Betreuung, damit die Versorgung ohne Lücke weiterläuft.</p><p>Voraussetzung ist ein Pflegegrad ab 2. Seit Juli 2025 gilt für Verhinderungs- und Kurzzeitpflege ein gemeinsamer Jahresbetrag – wir sagen Ihnen, was Ihnen zusteht.</p>',
@@ -540,7 +492,6 @@ final class SiteContent
             ),
             'pflegeberatung' => self::servicePage(
                 'Pflegeberatung und Beratungsbesuch nach § 37 Abs. 3',
-                'Kostenlos für Sie',
                 'Wer Pflegegeld bekommt, braucht regelmäßig einen Beratungsbesuch. Wir kommen zu Ihnen nach Hause – und beraten Sie auch sonst kostenlos zu Pflegegrad und Leistungen.',
                 ['pflegeberatung-hero.jpg', 'Pflegeberaterin erklärt einem älteren Ehepaar Unterlagen am Wohnzimmertisch'],
                 '<p>Beziehen Sie Pflegegeld und werden von Angehörigen gepflegt, ist ein Beratungsbesuch nach § 37 Abs. 3 SGB XI vorgeschrieben: bei Pflegegrad 2 und 3 halbjährlich, bei Pflegegrad 4 und 5 vierteljährlich. Die Kosten trägt die Pflegekasse.</p><p>Beim Besuch schauen wir gemeinsam, ob die Pflege gut läuft, wo es hakt und welche Hilfen Ihnen noch zustehen. Darüber hinaus beraten wir Sie kostenlos, wenn Sie einen Pflegegrad beantragen oder Leistungen kombinieren möchten.</p>',
@@ -559,26 +510,36 @@ final class SiteContent
             ),
             'ueber-uns' => [
                 'ElementalArea' => [
-                    self::hero('Über uns: das Pflegeteam Zukunft', 'Menschen, die helfen', 'Unsere Mitarbeiterinnen und Mitarbeiter sind das Herzstück des Pflegedienstes. Sie sorgen dafür, dass Sie sich zu Hause sicher und gut versorgt fühlen.', ['ueber-uns-hero.jpg', 'Das Team des Pflegeteams Zukunft vor dem Büro an der Bürgerweide'], [['page' => 'kontakt', 'text' => 'Kontakt aufnehmen']]),
+                    self::hero('Über uns: das Pflegeteam Zukunft', 'Unsere Mitarbeiterinnen und Mitarbeiter sind das Herzstück des Pflegedienstes. Sie sorgen dafür, dass Sie sich zu Hause sicher und gut versorgt fühlen.', ['ueber-uns-hero.jpg', 'Das Team des Pflegeteams Zukunft vor dem Büro an der Bürgerweide'], [['page' => 'kontakt', 'text' => 'Kontakt aufnehmen']]),
                     [
                         'type' => ElementTextMedia::class,
                         'fields' => [
                             'Title' => 'Vielfalt und Fachkompetenz',
-                            'Content' => '<p>Unser Team besteht aus examinierten Gesundheits- und Krankenpfleger:innen, Altenpfleger:innen, Kinderkrankenschwestern, Pflegeberater:innen und Pflegeassistent:innen. Regelmäßige Fort- und Weiterbildungen halten uns auf dem aktuellen Stand der Pflege.</p><p>Wir sind Vertragspartner aller Kranken- und Pflegekassen sowie der Sozialämter. Die Kosten rechnen wir in der Regel direkt mit Ihrer Kasse ab.</p>',
-                            'Chips' => "Deutsch\nEnglisch\nBosnisch\nKroatisch\nSerbisch\nMazedonisch\nRussisch\nLitauisch",
-                            'ImagePosition' => 'right',
-                            'CardEyebrow' => 'Qualitätsprüfung des Medizinischen Dienstes · 04.09.2025',
-                            'CardValue' => '1,5',
-                            'CardLabel' => 'Gesamtnote „gut“',
-                            'CardRows' => "Pflegerische Leistungen | 1,6\nÄrztlich verordnete Leistungen | 2,0\nDienstleistung & Organisation | 1,0\nBefragung der Pflegebedürftigen | 1,2",
+                            'Content' => '<p>Unser Team besteht aus examinierten Gesundheits- und Krankenpfleger:innen, Altenpfleger:innen, Kinderkrankenschwestern, Pflegeberater:innen und Pflegeassistent:innen. Regelmäßige Fort- und Weiterbildungen halten uns auf dem aktuellen Stand der Pflege.</p><p>Wir sprechen Deutsch, Englisch, Bosnisch, Kroatisch, Serbisch, Mazedonisch, Russisch und Litauisch. Und wir sind Vertragspartner aller Kranken- und Pflegekassen sowie der Sozialämter.</p>',
                         ],
-                        'cardLink' => ['url' => 'https://www.pflegesuche.de/pflegedienst-qualitaetsbericht/MDK-pflegeteam-zukunft-gmbh_41026.pdf', 'text' => 'Transparenzbericht ansehen (PDF)', 'newWindow' => true],
+                    ],
+                    [
+                        'type' => ElementFeatureGrid::class,
+                        'fields' => [
+                            'Title' => 'Qualitätsprüfung 2025',
+                            'Intro' => 'Der Medizinische Dienst hat uns am 4. September 2025 geprüft. Gesamtnote: 1,5 („gut“).',
+                            'Variant' => 'columns',
+                            'Layout' => 'side',
+                        ],
+                        'items' => [
+                            ['title' => 'Pflegerische Leistungen', 'text' => 'Note 1,6'],
+                            ['title' => 'Ärztlich verordnete Leistungen', 'text' => 'Note 2,0'],
+                            ['title' => 'Dienstleistung & Organisation', 'text' => 'Note 1,0'],
+                            ['title' => 'Befragung der Pflegebedürftigen', 'text' => 'Note 1,2'],
+                        ],
+                        'links' => [
+                            ['url' => 'https://www.pflegesuche.de/pflegedienst-qualitaetsbericht/MDK-pflegeteam-zukunft-gmbh_41026.pdf', 'text' => 'Transparenzbericht (PDF)', 'newWindow' => true],
+                        ],
                     ],
                     [
                         'type' => ElementTeam::class,
                         'fields' => [
                             'Title' => 'Ihre Ansprechpartner:innen',
-                            'Eyebrow' => 'Team',
                             'Background' => 'light',
                         ],
                         'items' => [
@@ -590,7 +551,6 @@ final class SiteContent
                             ['page' => 'karriere', 'text' => 'Teil des Teams werden'],
                         ],
                     ],
-                    self::cta(),
                 ],
             ],
             'karriere' => [
@@ -600,41 +560,45 @@ final class SiteContent
                         'fields' => [
                             'Title' => 'Pflegedienst-Jobs in Hamburg: Komm ins Pflegeteam Zukunft.',
                             'HeadingLevel' => 'h1',
-                            'Eyebrow' => 'Jobs in der ambulanten Pflege',
-                            'Lead' => 'Feste Touren, ein Team, das zusammenhält, und Arbeitszeiten, die zu deinem Leben passen. Bewirb dich in zwei Minuten – ohne Anschreiben.',
-                            'Variant' => 'accent',
+                            'Variant' => 'image',
                             'ShowBreadcrumbs' => true,
                             'Spacing' => 'none',
                         ],
-                        'images' => ['Image' => ['karriere-hero.jpg', 'Pflegefachkraft mit Tablet steigt in Hamburg aus dem Dienstwagen']],
+                        'images' => ['Image' => ['karriere-hero.jpg', 'Pflegefachkraft mit Tablet auf dem Weg zum Einsatz in einer Hamburger Straße']],
                         'links' => [
-                            ['page' => 'karriere', 'anchor' => CareerPage::APPLY_ANCHOR, 'text' => 'Schnell bewerben'],
                             ['page' => 'karriere', 'anchor' => 'offene-stellen', 'text' => 'Offene Stellen'],
+                            ['page' => 'karriere', 'anchor' => CareerPage::APPLY_ANCHOR, 'text' => 'In 2 Minuten bewerben'],
+                        ],
+                    ],
+                    [
+                        'type' => ElementTextMedia::class,
+                        'fields' => [
+                            'Title' => 'Gute Pflege braucht Zeit. Und ein Team, das zusammenhält.',
+                            'Content' => '<p>Bei uns arbeitest du mit festen Touren, kurzen Wegen zur Pflegedienstleitung und Kolleginnen und Kollegen aus vielen Ländern. Berufseinsteiger:innen sind genauso willkommen wie erfahrene Pflegekräfte.</p>',
+                            'Spacing' => 'md',
                         ],
                     ],
                     [
                         'type' => ElementFeatureGrid::class,
                         'fields' => [
-                            'Title' => 'Was dich bei uns erwartet',
-                            'Variant' => 'icon-cards',
-                            'Columns' => '3',
+                            'Title' => 'Was dich erwartet',
+                            'Variant' => 'columns',
+                            'Layout' => 'side',
                         ],
                         'items' => [
-                            ['title' => 'Voll- oder Teilzeit', 'text' => 'Arbeitszeiten nach Absprache – passend zu Familie, Studium oder Zweitjob.', 'icon' => 'clock'],
-                            ['title' => 'Faire Vergütung', 'text' => 'Leistungsgerecht bezahlt – sprich uns auf die Details an.', 'icon' => 'euro'],
-                            ['title' => 'Fester Ansprechpartner', 'text' => 'Kurze Wege zur Pflegedienstleitung – bei jeder Frage.', 'icon' => 'user'],
-                            ['title' => 'Fort- & Weiterbildung', 'text' => 'Wir fördern Schulungen, damit du fachlich vorne bleibst.', 'icon' => 'school'],
-                            ['title' => 'Großzügiger Urlaub', 'text' => 'Erholung ist Teil guter Pflege – auch für dich.', 'icon' => 'sun'],
-                            ['title' => 'Team aus vielen Ländern', 'text' => 'Acht Sprachen im Team – du bist willkommen, wie du bist.', 'icon' => 'chat'],
+                            ['title' => 'Voll- oder Teilzeit', 'text' => 'Arbeitszeiten nach Absprache.'],
+                            ['title' => 'Faire Vergütung', 'text' => 'Leistungsgerecht bezahlt.'],
+                            ['title' => 'Fester Ansprechpartner', 'text' => 'Kurze Wege, schnelle Antworten.'],
+                            ['title' => 'Fort- & Weiterbildung', 'text' => 'Wir fördern Schulungen.'],
+                            ['title' => 'Großzügiger Urlaub', 'text' => 'Erholung gehört dazu.'],
+                            ['title' => 'Acht Sprachen im Team', 'text' => 'Willkommen, wie du bist.'],
                         ],
                     ],
                     [
                         'type' => ElementJobList::class,
                         'fields' => [
-                            'Title' => 'Aktuell suchen wir',
-                            'Eyebrow' => 'Offene Stellen',
+                            'Title' => 'Offene Stellen',
                             'Intro' => 'Deine Stelle ist nicht dabei? Bewirb dich initiativ – wir freuen uns.',
-                            'Background' => 'light',
                         ],
                     ],
                 ],
@@ -645,7 +609,6 @@ final class SiteContent
                         'fields' => [
                             'Title' => 'In 2 Minuten bewerben',
                             'ShowTitle' => true,
-                            'ExtraClass' => 'form-accent',
                             'SubmitButtonText' => 'Bewerbung absenden',
                             'OnCompleteMessage' => '<p><strong>Danke für deine Bewerbung!</strong> Wir melden uns in den nächsten Tagen telefonisch bei dir.</p>',
                         ],
@@ -657,22 +620,22 @@ final class SiteContent
                         ['Gibt es flexible Arbeitszeiten?', 'Ja. Wir bieten Voll- und Teilzeit an und gestalten die Arbeitszeiten nach Absprache.'],
                         ['Wie läuft die Bewerbung ab?', 'Formular senden oder anrufen – danach lernen wir uns persönlich in unserem Büro kennen. Ein Anschreiben brauchst du nicht.'],
                         ['Werden Fortbildungen unterstützt?', 'Ja, wir fördern die Teilnahme an Fort- und Weiterbildungen, damit du fachlich auf dem neuesten Stand bleibst.'],
-                    ], 'md'),
+                    ]),
                 ],
             ],
             'job-pflegefachkraft' => [
                 'ElementalArea' => [
-                    self::hero('Pflegefachkraft (m/w/d) in der ambulanten Pflege', 'Stellenangebot · Hamburg', 'Examiniert, mit Herz und Lust auf eigenständiges Arbeiten – bei uns findest du ein Team, das zusammenhält.', null, [['page' => 'karriere', 'anchor' => CareerPage::APPLY_ANCHOR, 'text' => 'Jetzt bewerben'], ['phone' => self::PHONE_E164, 'text' => 'Fragen? ' . self::PHONE]], 'accent'),
+                    self::hero('Pflegefachkraft (m/w/d) in der ambulanten Pflege', 'Examiniert, mit Herz und Lust auf eigenständiges Arbeiten – bei uns findest du ein Team, das zusammenhält.', null, [['page' => 'karriere', 'anchor' => CareerPage::APPLY_ANCHOR, 'text' => 'Jetzt bewerben']]),
                 ],
             ],
             'job-pflegeassistenz' => [
                 'ElementalArea' => [
-                    self::hero('Pflegeassistenz / Pflegehelfer (m/w/d)', 'Stellenangebot · Hamburg', 'Du unterstützt unsere Fachkräfte in der Grundpflege und im Alltag unserer Kund:innen – in Voll-, Teilzeit oder als Minijob.', null, [['page' => 'karriere', 'anchor' => CareerPage::APPLY_ANCHOR, 'text' => 'Jetzt bewerben'], ['phone' => self::PHONE_E164, 'text' => 'Fragen? ' . self::PHONE]], 'accent'),
+                    self::hero('Pflegeassistenz / Pflegehelfer (m/w/d)', 'Du unterstützt unsere Fachkräfte in der Grundpflege und im Alltag unserer Kund:innen – in Voll-, Teilzeit oder als Minijob.', null, [['page' => 'karriere', 'anchor' => CareerPage::APPLY_ANCHOR, 'text' => 'Jetzt bewerben']]),
                 ],
             ],
             'kontakt' => [
                 'ElementalArea' => [
-                    self::hero('Kontakt zum Pflegedienst in Hamburg', 'Wir sind für Sie da', 'Rufen Sie uns an oder schreiben Sie uns – wir melden uns schnell zurück und vereinbaren gern einen Beratungstermin bei Ihnen zu Hause.', null, [$phoneLink]),
+                    self::hero('Kontakt zum Pflegedienst in Hamburg', 'Rufen Sie uns an oder schreiben Sie uns – wir melden uns schnell zurück und vereinbaren gern einen Beratungstermin bei Ihnen zu Hause.', null, []),
                     [
                         'type' => ElementForm::class,
                         'form' => 'contact',
@@ -761,16 +724,15 @@ final class SiteContent
      * @param array<int, array<string, mixed>> $links
      * @return array<string, mixed>
      */
-    private static function hero(string $title, string $eyebrow, string $lead, ?array $image, array $links, string $variant = 'compact'): array
+    private static function hero(string $title, string $lead, ?array $image, array $links): array
     {
         $block = [
             'type' => ElementHero::class,
             'fields' => [
                 'Title' => $title,
                 'HeadingLevel' => 'h1',
-                'Eyebrow' => $eyebrow,
                 'Lead' => $lead,
-                'Variant' => $variant,
+                'Variant' => 'compact',
                 'ShowBreadcrumbs' => true,
                 'Spacing' => 'none',
             ],
@@ -787,68 +749,45 @@ final class SiteContent
      * @param array<int, array{0: string, 1: string}> $items
      * @return array<string, mixed>
      */
-    private static function faq(string $title, array $items, string $spacing = 'md'): array
+    private static function faq(string $title, array $items, string $background = 'none'): array
     {
         return [
             'type' => ElementFaq::class,
             'fields' => [
                 'Title' => $title,
-                'Layout' => 'stacked',
-                'Spacing' => $spacing,
+                'Background' => $background,
             ],
             'items' => $items,
         ];
     }
 
     /**
-     * @return array<string, mixed>
-     */
-    private static function cta(): array
-    {
-        return [
-            'type' => ElementCallToAction::class,
-            'fields' => [
-                'Title' => 'Fragen zur Pflege? Wir beraten Sie kostenlos.',
-                'Content' => 'Montag bis Freitag von 8 bis 16 Uhr – auf Deutsch, Bosnisch, Russisch und in weiteren Sprachen.',
-                'Variant' => 'boxed',
-            ],
-            'links' => [
-                ['phone' => self::PHONE_E164, 'text' => self::PHONE],
-                ['page' => 'kontakt', 'text' => 'Rückruf anfordern'],
-            ],
-        ];
-    }
-
-    /**
-     * Service page: compact hero, intro text, feature list, FAQ in the main column; CTA in the bottom area.
+     * Service page: compact hero; intro text, hairline list and FAQ in the main column (sidebar from the template).
      *
      * @param array{0: string, 1: string} $image
-     * @param array<int, array{0: string, 1: string, 2: string}> $features
+     * @param array<int, array{0: string, 1: string, 2?: string}> $features
      * @param array<int, array{0: string, 1: string}> $faq
      * @return array<string, array<int, array<string, mixed>>>
      */
-    private static function servicePage(string $h1, string $eyebrow, string $lead, array $image, string $intro, string $featureTitle, array $features, array $faq): array
+    private static function servicePage(string $h1, string $lead, array $image, string $intro, string $featureTitle, array $features, array $faq): array
     {
         return [
             'ElementalArea' => [
-                self::hero($h1, $eyebrow, $lead, $image, [['page' => 'kontakt', 'text' => 'Pflege anfragen'], ['phone' => self::PHONE_E164, 'text' => self::PHONE . ' anrufen']]),
+                self::hero($h1, $lead, $image, [['page' => 'kontakt', 'text' => 'Pflege anfragen'], ['phone' => self::PHONE_E164, 'text' => self::PHONE]]),
                 [
                     'type' => ElementTextMedia::class,
                     'fields' => ['Title' => 'Das Wichtigste in Kürze', 'Content' => $intro, 'Spacing' => 'none'],
                 ],
                 [
                     'type' => ElementFeatureGrid::class,
-                    'fields' => ['Title' => $featureTitle, 'Variant' => 'icon-cards', 'Columns' => '2', 'Spacing' => 'none'],
-                    'items' => array_map(static fn (array $f): array => ['title' => $f[0], 'text' => $f[1], 'icon' => $f[2]], $features),
+                    'fields' => ['Title' => $featureTitle, 'Variant' => 'list', 'Layout' => 'stacked', 'Spacing' => 'none'],
+                    'items' => array_map(static fn (array $f): array => ['title' => $f[0], 'text' => $f[1]], $features),
                 ],
                 [
                     'type' => ElementFaq::class,
-                    'fields' => ['Title' => 'Häufige Fragen', 'Layout' => 'stacked', 'Spacing' => 'none'],
+                    'fields' => ['Title' => 'Häufige Fragen', 'Spacing' => 'none'],
                     'items' => $faq,
                 ],
-            ],
-            'BottomArea' => [
-                self::cta(),
             ],
         ];
     }

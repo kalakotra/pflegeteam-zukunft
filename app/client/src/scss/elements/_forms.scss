@@ -53,6 +53,7 @@
         @extend .form-check-input;
         width: 1.5rem;   // 24 px target (WCAG 2.5.8)
         height: 1.5rem;
+        border-radius: .25rem;
         margin-top: 0;
         margin-right: .625rem;
         flex: none;
@@ -113,13 +114,17 @@
     }
 }
 
-.form-accent .userform .btn-toolbar {
-    input[type='submit'],
-    button[type='submit'] { @extend .btn-accent; }
+.form-element__complete {
+    padding: 1.5rem 0;
+    border-block: 1px solid $hairline;
 }
 
-.form-element__complete {
-    padding: 1.5rem;
-    background: $petrol-tint;
-    border-radius: $border-radius-lg;
+.form-element__title {
+    font-size: calc(1.4rem + 1vw);
+
+    @include media-breakpoint-up(xl) { font-size: $h2-font-size; }
 }
+
+.userform .field label.left + .middleColumn input,
+.userform textarea,
+.userform select { background-color: $white; }

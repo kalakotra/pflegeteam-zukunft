@@ -21,7 +21,7 @@
     <main id="main" tabindex="-1">
         $Layout
     </main>
+    <% if $ShowContactStrip %><% include ContactStrip %><% end_if %>
     <% include Footer %>
-    <% include StickyActionBar %>
 </body>
 </html>

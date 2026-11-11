@@ -10,7 +10,7 @@ use SilverStripe\Forms\TextField;
 use YouWillLikeIT\Elements\Elements\ElementBase;
 
 /**
- * Small kicker line above the element heading ("Leistungen", "Karriere", …).
+ * Short kicker above the heading, e.g. "Wir stellen ein" (sentence case, accent colour).
  *
  * @property string $Eyebrow
  * @extends Extension<ElementBase>
@@ -30,7 +30,7 @@ class EyebrowExtension extends Extension
     {
         $fields->removeByName('Eyebrow');
         $field = TextField::create('Eyebrow', _t(self::class . '.Eyebrow', 'Dachzeile'))
-            ->setDescription(_t(self::class . '.EyebrowHint', 'Kurzes Stichwort über der Überschrift, z. B. „Leistungen“. Optional.'));
+            ->setDescription(_t(self::class . '.EyebrowHint', 'Kurzes Stichwort über der Überschrift, z. B. „Wir stellen ein“. Optional, sparsam einsetzen.'));
 
         if ($fields->dataFieldByName('Title')) {
             $fields->insertBefore('Title', $field);

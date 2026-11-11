@@ -10,53 +10,39 @@ use SilverStripe\Forms\FieldList;
 use YouWillLikeIT\Elements\Elements\ElementFeatureGrid;
 
 /**
- * Feature grid presentation: image cards (services), icon cards (benefits), steps (process),
- * check list (short facts). Columns apply from the large breakpoint.
+ * Feature grid as quiet lists separated by hairlines (no cards):
+ * - list: one entry per row, linked entries get an arrow (services);
+ * - columns: two columns of short entries (benefits).
+ * Layout "side" puts heading + intro in a left column, "stacked" above the list.
  *
  * @property string $Variant
- * @property int $Columns
- * @property string $HeaderAlign
+ * @property string $Layout
  * @extends Extension<ElementFeatureGrid>
  */
 class FeatureGridExtension extends Extension
 {
     private static array $db = [
-        'Variant' => "Enum('image-cards,icon-cards,steps,check-list','icon-cards')",
-        'Columns' => "Enum('2,3,4','3')",
-        'HeaderAlign' => "Enum('start,split,center','start')",
+        'Variant' => "Enum('list,columns','list')",
+        'Layout' => "Enum('side,stacked','side')",
     ];
 
     private static array $defaults = [
-        'Variant' => 'icon-cards',
-        'Columns' => '3',
-        'HeaderAlign' => 'start',
+        'Variant' => 'list',
+        'Layout' => 'side',
     ];
 
     protected function updateCMSFields(FieldList $fields): void
     {
-        $fields->removeByName(['Variant', 'Columns', 'HeaderAlign']);
+        $fields->removeByName(['Variant', 'Layout']);
         $fields->addFieldsToTab('Root.Settings', [
             DropdownField::create('Variant', _t(self::class . '.Variant', 'Darstellung'), [
-                'image-cards' => _t(self::class . '.ImageCards', 'Karten mit Bild (Leistungen)'),
-                'icon-cards' => _t(self::class . '.IconCards', 'Karten mit Symbol (Vorteile)'),
-                'steps' => _t(self::class . '.Steps', 'Nummerierte Schritte (Ablauf)'),
-                'check-list' => _t(self::class . '.CheckList', 'Häkchen-Liste'),
+                'list' => _t(self::class . '.List', 'Liste (ein Eintrag pro Zeile)'),
+                'columns' => _t(self::class . '.Columns', 'Zwei Spalten (kurze Einträge)'),
             ]),
-            DropdownField::create('Columns', _t(self::class . '.Columns', 'Spalten (Desktop)'), ['2' => '2', '3' => '3', '4' => '4']),
-            DropdownField::create('HeaderAlign', _t(self::class . '.HeaderAlign', 'Kopfbereich'), [
-                'start' => _t(self::class . '.AlignStart', 'Links'),
-                'split' => _t(self::class . '.AlignSplit', 'Überschrift links, Einleitung rechts'),
-                'center' => _t(self::class . '.AlignCenter', 'Zentriert'),
+            DropdownField::create('Layout', _t(self::class . '.Layout', 'Überschrift'), [
+                'side' => _t(self::class . '.Side', 'Links neben der Liste'),
+                'stacked' => _t(self::class . '.Stacked', 'Über der Liste'),
             ]),
         ]);
-    }
-
-    public function getColumnClass(): string
-    {
-        return match ((string) $this->getOwner()->Columns) {
-            '2' => 'row-cols-1 row-cols-md-2',
-            '4' => 'row-cols-1 row-cols-sm-2 row-cols-lg-4',
-            default => 'row-cols-1 row-cols-md-2 row-cols-lg-3',
-        };
     }
 }

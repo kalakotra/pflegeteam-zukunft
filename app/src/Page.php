@@ -102,6 +102,14 @@ class Page extends SiteTree
     }
 
     /**
+     * The contact strip above the footer is hidden on the contact page itself and on legal pages.
+     */
+    public function getShowContactStrip(): bool
+    {
+        return !$this instanceof \App\Pages\ContactPage && !$this->NoIndex;
+    }
+
+    /**
      * wilr/silverstripe-googlesitemaps hook (invokeWithExtensions, minimum of all results wins):
      * noindex pages are not listed in sitemap.xml.
      */

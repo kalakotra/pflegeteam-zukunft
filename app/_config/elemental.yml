@@ -28,16 +28,18 @@ DNADesign\Elemental\Controllers\ElementController:
 
 # Section styles → Bootstrap classes (module stays framework-agnostic)
 YouWillLikeIT\Elements\Extensions\SectionStyleExtension:
+  # Clean theme: white or a pale grey band only. 'dark'/'primary'/'image' map to the pale band
+  # so the look stays calm even if an editor picks them.
   background_classes:
     light: 'bg-light'
-    dark: 'bg-dark text-bg-dark'
-    primary: 'bg-primary text-bg-primary'
-    image: 'text-bg-dark section--image'
+    dark: 'bg-light'
+    primary: 'bg-light'
+    image: 'bg-light'
   spacing_classes:
     none: ''
-    sm: 'py-5'
-    md: 'py-6 py-lg-7'
-    lg: 'py-7'
+    sm: 'section-space-sm'
+    md: 'section-space'
+    lg: 'section-space-lg'
   width_classes:
     default: 'container'
     narrow: 'container container-narrow'
@@ -46,37 +48,17 @@ YouWillLikeIT\Elements\Extensions\SectionStyleExtension:
 # Project fields on module elements (module never changed for this site)
 YouWillLikeIT\Elements\Elements\ElementHero:
   extensions:
-    - App\Extensions\Elements\EyebrowExtension
     - App\Extensions\Elements\HeroExtension
 
 YouWillLikeIT\Elements\Elements\ElementFeatureGrid:
   extensions:
-    - App\Extensions\Elements\EyebrowExtension
     - App\Extensions\Elements\FeatureGridExtension
-
-YouWillLikeIT\Elements\Models\FeatureItem:
-  extensions:
-    - App\Extensions\Elements\FeatureItemExtension
 
 YouWillLikeIT\Elements\Elements\ElementTextMedia:
   extensions:
     - App\Extensions\Elements\EyebrowExtension
     - App\Extensions\Elements\TextMediaExtension
 
-YouWillLikeIT\Elements\Elements\ElementCallToAction:
-  extensions:
-    - App\Extensions\Elements\EyebrowExtension
-    - App\Extensions\Elements\CallToActionExtension
-
-YouWillLikeIT\Elements\Elements\ElementFaq:
-  extensions:
-    - App\Extensions\Elements\EyebrowExtension
-    - App\Extensions\Elements\FaqExtension
-
 YouWillLikeIT\Elements\Elements\ElementTestimonials:
   extensions:
     - App\Extensions\Elements\TestimonialsExtension
-
-YouWillLikeIT\Elements\Elements\ElementTeam:
-  extensions:
-    - App\Extensions\Elements\EyebrowExtension

@@ -260,10 +260,6 @@ class SeedSiteTask extends BuildTask
             $element->setField($field . 'Alt', $alt);
         }
 
-        if (isset($block['sideImage'])) {
-            $element->setField('SideImageID', $this->image($block['sideImage'][0], 'Elements/FAQ', $block['sideImage'][1])?->ID ?? 0);
-        }
-
         $element->write();
 
         if ($element instanceof ElementBase) {
@@ -274,13 +270,6 @@ class SeedSiteTask extends BuildTask
                 $link->OwnerRelation = 'CTALinks';
                 $link->Sort = $i + 1;
                 $link->write();
-            }
-        }
-
-        foreach (['teaserLink' => 'TeaserLink', 'cardLink' => 'CardLink'] as $key => $relation) {
-            if (isset($block[$key])) {
-                $this->attachHasOne($element, $relation, $this->link($block[$key]));
-                $element->write();
             }
         }
 
@@ -305,7 +294,6 @@ class SeedSiteTask extends BuildTask
             $item = FeatureItem::create([
                 'Title' => $def['title'],
                 'Text' => $def['text'] ?? '',
-                'Icon' => $def['icon'] ?? '',
                 'Sort' => $i + 1,
             ]);
             $item->ParentID = $grid->ID;

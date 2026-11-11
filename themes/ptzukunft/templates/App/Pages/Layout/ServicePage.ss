@@ -2,43 +2,36 @@ $HeaderElement
 
 <div class="container column-layout">
     <div class="row g-4 g-lg-5">
-        <div class="col-lg-8 column-layout__main">
+        <div class="col-lg-7 column-layout__main">
             <% loop $MainElements %>
                 $Me
             <% end_loop %>
         </div>
-        <aside class="col-lg-4" aria-label="<%t App.ServiceSidebar 'Weitere Informationen' %>">
+        <aside class="col-lg-4 offset-lg-1" aria-label="<%t App.ServiceSidebar 'Weitere Informationen' %>">
             <div class="side-stack">
                 <% if $SiblingServices %>
-                <nav class="side-nav card" aria-labelledby="service-nav-title">
-                    <h2 class="side-nav__title h5" id="service-nav-title"><%t App.OurServices 'Unsere Leistungen' %></h2>
+                <nav class="side-nav" aria-labelledby="service-nav-title">
+                    <h2 class="side-nav__title" id="service-nav-title"><%t App.OurServices 'Unsere Leistungen' %></h2>
                     <ul class="list-unstyled mb-0">
                         <% loop $SiblingServices %>
-                        <li><a href="$Link" class="<% if $isCurrent %>active<% end_if %>"<% if $isCurrent %> aria-current="page"<% end_if %>>$MenuTitle</a></li>
+                        <li><a href="$Link"<% if $isCurrent %> class="active" aria-current="page"<% end_if %>>$MenuTitle</a></li>
                         <% end_loop %>
                     </ul>
                 </nav>
                 <% end_if %>
                 <% with $SiteConfig %>
-                <div class="side-cta card text-bg-primary" data-bs-theme="dark">
-                    <div class="card-body">
-                        <h2 class="h4"><%t App.RequestCare 'Pflege anfragen' %></h2>
-                        <p><%t App.FreeAdvice 'Kostenlose Beratung – wir melden uns schnell zurück.' %></p>
-                        <% include OpeningHours %>
-                        <% if $Phone %><a href="$PhoneLink" class="btn btn-light w-100 mt-3"><% include Icon Name='phone', Class='icon-sm' %>$Phone</a><% end_if %>
-                    </div>
+                <div class="side-box">
+                    <h2 class="side-box__title"><%t App.QuestionsCare 'Fragen zur Pflege?' %></h2>
+                    <p class="mb-2"><%t App.FreeAdviceShort 'Kostenlose Beratung' %><% loop $OpeningHoursGrouped %>, $Label $Times<% end_loop %>.</p>
+                    <% if $Phone %><a class="side-box__phone" href="$PhoneLink">$Phone</a><% end_if %>
                 </div>
                 <% end_with %>
                 <% if $CareerPage && $SiteConfig.HiringBadge %>
-                <a class="side-jobs card" href="$CareerPage.Link">
-                    <span class="side-jobs__badge">$SiteConfig.HiringBadge</span>
-                    <span class="side-jobs__title"><% if $SiteConfig.HiringText %>$SiteConfig.HiringText<% else %>$CareerPage.MenuTitle<% end_if %></span>
-                    <span class="side-jobs__more"><%t App.ViewJobs 'Offene Stellen ansehen' %> <% include Icon Name='arrow', Class='icon-sm' %></span>
-                </a>
+                <p class="side-hiring"><span class="kicker">$SiteConfig.HiringBadge:</span> <a href="$CareerPage.Link">$CareerPage.MenuTitle</a></p>
                 <% end_if %>
             </div>
         </aside>
     </div>
 </div>
 
-$BottomArea
+<% loop $BottomArea.ElementControllers %>$Me<% end_loop %>

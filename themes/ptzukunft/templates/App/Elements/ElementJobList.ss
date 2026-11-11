@@ -1,27 +1,19 @@
-<div class="job-list">
-    <% if $Heading || $Intro %>
-    <header class="section-head">
-        <% if $Eyebrow %><p class="eyebrow">$Eyebrow</p><% end_if %>
-        $Heading('section-head__title')
-        <% if $Intro %><p class="section-head__intro">$Intro</p><% end_if %>
+<div class="feature-list feature-list--list feature-list--side job-list">
+    <header class="feature-list__head">
+        $Heading('section-title')
+        <% if $Intro %><p class="feature-list__intro">$Intro</p><% end_if %>
     </header>
-    <% end_if %>
     <% if $Jobs %>
-    <ul class="list-unstyled d-grid gap-3 mb-0">
+    <ul class="feature-list__items list-unstyled">
         <% loop $Jobs %>
-        <li>
-            <article class="job-card card">
-                <div class="card-body">
-                    <div class="job-card__main">
-                        <$Up.ChildHeadingTag class="job-card__title"><a class="stretched-link" href="$Link">$Title</a></$Up.ChildHeadingTag>
-                        <% if $Teaser %><p class="job-card__teaser">$Teaser</p><% end_if %>
-                        <ul class="job-card__facts list-unstyled">
-                            <% loop $Facts %><li>$Value</li><% end_loop %>
-                        </ul>
-                    </div>
-                    <span class="btn btn-primary job-card__cta" aria-hidden="true"><%t App.DetailsApply 'Details & bewerben' %></span>
-                </div>
-            </article>
+        <li class="feature-list__item">
+            <a class="feature-list__link" href="$Link">
+                <span>
+                    <$Up.ChildHeadingTag class="feature-list__title">$Title</$Up.ChildHeadingTag>
+                    <span class="feature-list__text"><% loop $Facts.Limit(3) %><% if not $IsFirst %> · <% end_if %>$Value<% end_loop %></span>
+                </span>
+                <span class="feature-list__arrow" aria-hidden="true">→</span>
+            </a>
         </li>
         <% end_loop %>
     </ul>
